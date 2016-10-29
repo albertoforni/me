@@ -7,5 +7,13 @@ const List = {
   }),
 };
 
-/* eslint-disable import/prefer-default-export */
-export { List };
+const Button = {
+  noStyle: style({
+    border: 0,
+    padding: 0,
+    background: 'none',
+    outline: 0,
+  }),
+};
+
+export { List, Button };

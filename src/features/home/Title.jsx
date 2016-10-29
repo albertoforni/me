@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { style, merge } from 'glamor';
 import Link from '../../common/components/Link';
-import { style, merge } from 'glamor'
-import { List } from '../../common/style'
+import { List } from '../../common/style';
 
 const styles = {
   header: style({
@@ -23,22 +23,20 @@ const styles = {
     {
       padding: '1rem',
     }
-  )
+  ),
 };
 
 
-class App extends Component {
-  render() {
-    return (
-      <header className={styles.header}>
-        <h1 className={styles.title}>Alberto Forni</h1>
-        <ul className={styles.links}>
-            <li className={styles.link}><Link href="mailto:me@albertoforni.com">me@albertoforni.com</Link></li>
-            <li className={styles.link}><Link href="tel:+447941643042">+44 7941 64 30 42</Link></li>
-        </ul>
-      </header>
+const Title = () => (
+  <header className={styles.header}>
+    <h1 className={styles.title}>Alberto Forni</h1>
+    <ul className={styles.links}>
+      <li className={styles.link}>
+        <Link href="mailto:me@albertoforni.com">me@albertoforni.com</Link>
+      </li>
+      <li className={styles.link}><Link href="tel:+447941643042">+44 7941 64 30 42</Link></li>
+    </ul>
+  </header>
     );
-  }
-}
 
-export default App;
+export default Title;
