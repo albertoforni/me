@@ -17,7 +17,7 @@ it('renders a navigation', () => {
   const selectedItem = wrapper.state('activeSection');
 
   const navProps = wrapper.find(Nav).props();
-  expect(navProps.navItems.length).toEqual(5);
+  expect(navProps.navItems.length).toEqual(4);
   expect(navProps.onNavItemClick).toBeInstanceOf(Function);
   expect(navProps.selectedItem).toEqual(selectedItem);
 });

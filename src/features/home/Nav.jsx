@@ -6,7 +6,7 @@ import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
 
 const prevButtonStyle = style({
-  position: 'absolute',
+  position: 'fixed',
   bottom: 10,
   left: 10,
   height: 40,
