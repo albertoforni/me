@@ -39,6 +39,14 @@ const Nav = ({ navItems, onNavItemClick, selectedItem }) => {
       <Button
         onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
       >{'>'}</Button>
+      {
+        navItemsBySelected.length === 1 ?
+        (
+          <HamburgerMenu
+            onClick={() => onNavItemClick(-1)}
+          />
+        ) : null
+      }
       <ul className={styles.menu} role="menubar">
         {
           navItemsBySelected.map((navItem, index) =>

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Nav from './Nav';
 import NavItem from './NavItem';
+import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
 
 const defaultProps = {
@@ -133,5 +134,34 @@ describe('navigation buttons', () => {
     wrapper.find(Button).at(0).props().onClick();
 
     expect(aSpyFunc).toHaveBeenCalledWith(lastNavItemIndex);
+  });
+});
+
+describe('hamburger menu', () => {
+  it('doesnt render the hamburger menu if there are no active sections', () => {
+    const wrapper = shallow(
+      <Nav
+        {...defaultProps}
+        selectedItem={-1}
+      />
+    );
+
+    expect(wrapper.find(HamburgerMenu).length).toEqual(0);
+  });
+
+  it('calls onNavItemClick with index -1', () => {
+    const aSpyFunc = jest.fn();
+
+    const wrapper = shallow(
+      <Nav
+        {...defaultProps}
+        onNavItemClick={aSpyFunc}
+        selectedItem={0}
+      />
+    );
+
+    wrapper.find(HamburgerMenu).at(0).props().onClick();
+
+    expect(aSpyFunc).toHaveBeenCalledWith(-1);
   });
 });
