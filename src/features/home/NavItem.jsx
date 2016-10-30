@@ -1,11 +1,6 @@
 import React, { PropTypes } from 'react';
 import { style, merge, parent } from 'glamor';
 import { Button } from '../../common/style';
-import about from '../../common/icons/about.svg';
-import dev from '../../common/icons/dev.svg';
-import education from '../../common/icons/education.svg';
-import experience from '../../common/icons/experience.svg';
-import learn from '../../common/icons/learn.svg';
 
 const styles = {
   menuButton: merge([
@@ -43,23 +38,6 @@ const menuButtonTextContainerHover = parent(`.${styles.menuButton.toString()}:ho
   boxShadow: '1px 1px 6px 1px rgba(170,170,170,0.7)',
 });
 
-const getIcon = (iconName) => {
-  switch (iconName) {
-    case 'about':
-      return about;
-    case 'dev':
-      return dev;
-    case 'education':
-      return education;
-    case 'experience':
-      return experience;
-    case 'learn':
-      return learn;
-    default:
-      return iconName;
-  }
-};
-
 const NavItem = ({ icon, text, menuIndex }) => {
   const menuLbl = `menuLbl${menuIndex}`;
 
@@ -72,7 +50,7 @@ const NavItem = ({ icon, text, menuIndex }) => {
             id={menuLbl}
           >{text}</span>
         </div>
-        <img className={styles.icon} role="presentation" alt={text} src={getIcon(icon)} />
+        <img className={styles.icon} role="presentation" alt={text} src={icon} />
       </button>
     </li>
   );

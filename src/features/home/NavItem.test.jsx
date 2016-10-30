@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NavItem from './NavItem';
-import about from '../../common/icons/about.svg';
 
 const defaultProps = {
   text: 'default text',
-  icon: 'default',
+  icon: 'a default icon stream',
   menuIndex: 1,
 };
 
@@ -24,7 +23,7 @@ it('renders the menu text', () => {
 
 it('renders an icon', () => {
   const someText = 'some text';
-  const anIcon = 'about';
+  const anIcon = 'a default icon stream';
 
   const wrapper = shallow(
     <NavItem
@@ -35,7 +34,7 @@ it('renders an icon', () => {
   );
 
   const iconProps = wrapper.find('img').props();
-  expect(iconProps.src).toEqual(about);
+  expect(iconProps.src).toEqual(anIcon);
   expect(iconProps.alt).toEqual(someText);
 });
 

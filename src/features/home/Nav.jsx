@@ -2,6 +2,13 @@ import React from 'react';
 import { List } from '../../common/style';
 import NavItem from './NavItem';
 
+// Icons
+import about from '../../common/icons/about.svg';
+import dev from '../../common/icons/dev.svg';
+import education from '../../common/icons/education.svg';
+import experience from '../../common/icons/experience.svg';
+import learn from '../../common/icons/learn.svg';
+
 const styles = {
   menu: List.noStyle,
 };
@@ -9,23 +16,23 @@ const styles = {
 const NavItems = [
   {
     text: 'about me',
-    icon: 'about',
+    icon: about,
   },
   {
     text: 'experience',
-    icon: 'experience',
+    icon: experience,
   },
   {
     text: 'education',
-    icon: 'education',
+    icon: education,
   },
   {
     text: 'development skills',
-    icon: 'dev',
+    icon: dev,
   },
   {
     text: 'learning',
-    icon: 'learn',
+    icon: learn,
   },
 ];
 
