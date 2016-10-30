@@ -10,6 +10,7 @@ const defaultProps = {
     { icon: 'an icon', text: 'some text' },
   ],
   onNavItemClick: () => {},
+  selectedItem: -1,
 };
 
 it('renders NavItems', () => {
@@ -45,4 +46,28 @@ it('calls the onNavItemClick with the new menu Index', () => {
   wrapper.find(NavItem).at(1).props().onNavItemClick();
 
   expect(aSpyFunc).toHaveBeenCalledWith(1);
+});
+
+it('render only the selectedNavItem', () => {
+  const thisTestIcon = 'this test icon';
+  const thisTestText = 'this test text';
+
+  const navItems = [
+    { icon: 'an icon', text: 'some text' },
+    { icon: 'an icon', text: 'some text' },
+    { icon: thisTestIcon, text: thisTestText },
+  ];
+  const selectedItem = 2;
+
+  const wrapper = shallow(
+    <Nav
+      {...defaultProps}
+      navItems={navItems}
+      selectedItem={selectedItem}
+    />
+  ).find(TransitionMotion).shallow();
+
+  expect(wrapper.find(NavItem).length).toEqual(1);
+  expect(wrapper.find(NavItem).props().icon).toEqual(thisTestIcon);
+  expect(wrapper.find(NavItem).props().text).toEqual(thisTestText);
 });

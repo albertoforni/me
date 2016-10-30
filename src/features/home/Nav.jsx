@@ -8,24 +8,50 @@ const styles = {
 };
 
 const getDefaultStyles = navItems =>
-   navItems.map(navItem => ({ data: navItem, key: navItem.text, style: { height: 0, opacity: 1 } }))
-;
+  navItems.map(navItem => ({
+    data: navItem,
+    key: navItem.text,
+    style: {
+      height: 0,
+      opacity: 1,
+    },
+  }));
 
-const getStyles = navItems =>
-navItems.map(navItem => ({
-  data: navItem,
-  key: navItem.text,
-  style: {
-    height: spring(60, presets.gentle),
-    opacity: spring(1, presets.gentle),
-  },
-}));
+const getStyles = (navItems, selectedItem) => {
+  const selectedNavItem = navItems[selectedItem];
 
-const Nav = ({ navItems, onNavItemClick }) => (
+  if (selectedNavItem) {
+    return [{
+      data: selectedNavItem,
+      key: selectedNavItem.text,
+      style: {
+        height: spring(60, presets.gentle),
+        opacity: spring(1, presets.gentle),
+      },
+    }];
+  }
+
+  return navItems.map(navItem => ({
+    data: navItem,
+    key: navItem.text,
+    style: {
+      height: spring(60, presets.gentle),
+      opacity: spring(1, presets.gentle),
+    },
+  }));
+};
+
+const willLeave = () => ({
+  height: spring(0),
+  opacity: 0,
+});
+
+const Nav = ({ navItems, onNavItemClick, selectedItem }) => (
   <nav>
     <TransitionMotion
-      defaultStyles={getDefaultStyles(navItems)}
-      styles={getStyles(navItems)}
+      defaultStyles={getDefaultStyles(navItems, selectedItem)}
+      styles={getStyles(navItems, selectedItem)}
+      willLeave={willLeave}
     >
       {navItemsStyles =>
         <ul className={styles.menu} role="menubar">
@@ -49,6 +75,7 @@ const Nav = ({ navItems, onNavItemClick }) => (
 Nav.propTypes = {
   navItems: PropTypes.arrayOf(PropTypes.object),
   onNavItemClick: PropTypes.func,
+  selectedItem: PropTypes.number,
 };
 
 export default Nav;

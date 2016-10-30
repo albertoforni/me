@@ -26,7 +26,11 @@ class App extends React.Component {
     return (
       <div>
         <Title />
-        <Nav navItems={navItems} onNavItemClick={newSection => this.changeSection(newSection)} />
+        <Nav
+          navItems={navItems}
+          onNavItemClick={newSection => this.changeSection(newSection)}
+          selectedItem={activeSection}
+        />
         {
           displaySection ?
             <Section content={getSectionContent(activeSection)} /> :

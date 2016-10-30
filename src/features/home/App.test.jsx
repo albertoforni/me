@@ -14,9 +14,12 @@ it('renders a navigation', () => {
   const wrapper = shallow(<App />);
   expect(wrapper.find(Nav).length).toEqual(1);
 
+  const selectedItem = wrapper.state('activeSection');
+
   const navProps = wrapper.find(Nav).props();
   expect(navProps.navItems.length).toEqual(5);
   expect(navProps.onNavItemClick).toBeInstanceOf(Function);
+  expect(navProps.selectedItem).toEqual(selectedItem);
 });
 
 it('changes the active section onNavItemClick', () => {
