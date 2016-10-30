@@ -33,8 +33,10 @@ class App extends React.Component {
         />
         {
           displaySection ?
-            <Section content={getSectionContent(activeSection)} /> :
-            null
+            <Section
+              content={getSectionContent(activeSection)}
+            />
+            : null
         }
       </div>
     );

@@ -34,11 +34,18 @@ const styles = {
   }),
 };
 
-const menuButtonTextContainerHover = parent(`.${styles.menuButton.toString()}:hover`, {
+const menuButtonTextContainerHover = parent(`.${styles.menuButton.toString()}:enabled:hover`, {
   boxShadow: '1px 1px 6px 1px rgba(170,170,170,0.7)',
 });
 
-const NavItem = ({ icon, text, navIndex, onNavItemClick, style: inlineStyle }) => {
+const NavItem = ({
+  icon,
+  text,
+  navIndex,
+  onNavItemClick,
+  style: inlineStyle,
+  disabled,
+  }) => {
   const menuLbl = `menuLbl${navIndex}`;
 
   return (
@@ -46,7 +53,8 @@ const NavItem = ({ icon, text, navIndex, onNavItemClick, style: inlineStyle }) =
       <button
         className={`${styles.menuButton}`}
         aria-labelledby={menuLbl}
-        onClick={onNavItemClick}
+        onClick={disabled ? null : onNavItemClick}
+        disabled={disabled}
       >
         <div className={merge(styles.menuButtonTextContainer, menuButtonTextContainerHover)}>
           <span
@@ -69,6 +77,7 @@ NavItem.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ])),
+  disabled: PropTypes.bool,
 };
 
 

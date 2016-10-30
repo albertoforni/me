@@ -66,3 +66,18 @@ it('calls onMenuItemClick when button is clicked', () => {
   wrapper.find('button').simulate('click');
   expect(aSpyFunc).toHaveBeenCalled();
 });
+
+it('disables the click when disabled is passed in', () => {
+  const aSpyFunc = jest.fn();
+
+  const wrapper = shallow(
+    <NavItem
+      {...defaultProps}
+      onNavItemClick={aSpyFunc}
+      disabled
+    />
+  );
+
+  wrapper.find('button').simulate('click');
+  expect(aSpyFunc).not.toHaveBeenCalled();
+});
