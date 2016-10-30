@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { List } from '../../common/style';
 import NavItem from './NavItem';
+import Button from '../../common/components/Button';
 
 const styles = {
   menu: List.noStyle,
@@ -16,10 +17,28 @@ const getNavItems = (navItems, selectedItem) => {
   return navItems;
 };
 
+const nextIndex = (items, currentIndex, onNavItemClick) => {
+  const length = items.length;
+  const nextItemIndex = currentIndex + 1;
+  onNavItemClick(nextItemIndex >= length ? 0 : nextItemIndex);
+};
+
+const prevIndex = (items, currentIndex, onNavItemClick) => {
+  const prevItemIndex = currentIndex - 1;
+
+  onNavItemClick(prevItemIndex < 0 ? items.length - 1 : prevItemIndex);
+};
+
 const Nav = ({ navItems, onNavItemClick, selectedItem }) => {
   const navItemsBySelected = getNavItems(navItems, selectedItem);
   return (
     <nav>
+      <Button
+        onClick={() => prevIndex(navItems, selectedItem, onNavItemClick)}
+      >{'<'}</Button>
+      <Button
+        onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
+      >{'>'}</Button>
       <ul className={styles.menu} role="menubar">
         {
           navItemsBySelected.map((navItem, index) =>
