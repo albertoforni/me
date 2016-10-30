@@ -38,12 +38,16 @@ const menuButtonTextContainerHover = parent(`.${styles.menuButton.toString()}:ho
   boxShadow: '1px 1px 6px 1px rgba(170,170,170,0.7)',
 });
 
-const NavItem = ({ icon, text, menuIndex }) => {
-  const menuLbl = `menuLbl${menuIndex}`;
+const NavItem = ({ icon, text, navIndex, onNavItemClick }) => {
+  const menuLbl = `menuLbl${navIndex}`;
 
   return (
     <li role="menuitem">
-      <button className={`${styles.menuButton}`} aria-labelledby={menuLbl}>
+      <button
+        className={`${styles.menuButton}`}
+        aria-labelledby={menuLbl}
+        onClick={onNavItemClick}
+      >
         <div className={merge(styles.menuButtonTextContainer, menuButtonTextContainerHover)}>
           <span
             className={styles.menuButtonTextContent}
@@ -59,7 +63,8 @@ const NavItem = ({ icon, text, menuIndex }) => {
 NavItem.propTypes = {
   icon: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  menuIndex: PropTypes.number.isRequired,
+  navIndex: PropTypes.number.isRequired,
+  onNavItemClick: PropTypes.func.isRequired,
 };
 
 

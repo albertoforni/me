@@ -5,7 +5,8 @@ import NavItem from './NavItem';
 const defaultProps = {
   text: 'default text',
   icon: 'a default icon stream',
-  menuIndex: 1,
+  navIndex: 1,
+  onNavItemClick: () => {},
 };
 
 it('renders the menu text', () => {
@@ -44,10 +45,24 @@ it('renders the aria-labelledby with same key as the menu text', () => {
   const wrapper = shallow(
     <NavItem
       {...defaultProps}
-      menuIndex={anIndex}
+      navIndex={anIndex}
     />
   );
 
   expect(wrapper.find(`[aria-labelledby="menuLbl${anIndex}"]`).length).toEqual(1);
   expect(wrapper.find(`#menuLbl${anIndex}`).length).toEqual(1);
+});
+
+it('calls onMenuItemClick when button is clicked', () => {
+  const aSpyFunc = jest.fn();
+
+  const wrapper = shallow(
+    <NavItem
+      {...defaultProps}
+      onNavItemClick={aSpyFunc}
+    />
+  );
+
+  wrapper.find('button').simulate('click');
+  expect(aSpyFunc).toHaveBeenCalled();
 });
