@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { TransitionMotion } from 'react-motion';
 import Nav from './Nav';
 import NavItem from './NavItem';
 
@@ -21,7 +22,7 @@ it('renders NavItems', () => {
       {...defaultProps}
       navItems={navItems}
     />
-  );
+  ).find(TransitionMotion).shallow();
 
   expect(wrapper.find(NavItem).length).toEqual(navItems.length);
 });
@@ -39,7 +40,7 @@ it('calls the onNavItemClick with the new menu Index', () => {
       navItems={navItems}
       onNavItemClick={aSpyFunc}
     />
-  );
+  ).find(TransitionMotion).shallow();
 
   wrapper.find(NavItem).at(1).props().onNavItemClick();
 

@@ -38,11 +38,11 @@ const menuButtonTextContainerHover = parent(`.${styles.menuButton.toString()}:ho
   boxShadow: '1px 1px 6px 1px rgba(170,170,170,0.7)',
 });
 
-const NavItem = ({ icon, text, navIndex, onNavItemClick }) => {
+const NavItem = ({ icon, text, navIndex, onNavItemClick, style: inlineStyle }) => {
   const menuLbl = `menuLbl${navIndex}`;
 
   return (
-    <li role="menuitem">
+    <li role="menuitem" style={inlineStyle}>
       <button
         className={`${styles.menuButton}`}
         aria-labelledby={menuLbl}
@@ -65,6 +65,10 @@ NavItem.propTypes = {
   text: PropTypes.string.isRequired,
   navIndex: PropTypes.number.isRequired,
   onNavItemClick: PropTypes.func.isRequired,
+  style: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ])),
 };
 
 
