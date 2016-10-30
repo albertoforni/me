@@ -1,10 +1,29 @@
 import React, { PropTypes } from 'react';
+import { style, merge } from 'glamor';
 import { List } from '../../common/style';
 import NavItem from './NavItem';
+import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
+
+const prevButtonStyle = style({
+  position: 'absolute',
+  bottom: 10,
+  left: 10,
+  height: 40,
+  width: 40,
+  borderRadius: '50%',
+  border: '1px solid black',
+  background: 'white',
+  outline: 0,
+});
 
 const styles = {
   menu: List.noStyle,
+  prevButton: prevButtonStyle,
+  nextButton: merge(prevButtonStyle, {
+    left: 'auto',
+    right: 10,
+  }),
 };
 
 const getNavItems = (navItems, selectedItem) => {
@@ -33,12 +52,16 @@ const Nav = ({ navItems, onNavItemClick, selectedItem }) => {
   const navItemsBySelected = getNavItems(navItems, selectedItem);
   return (
     <nav>
-      <Button
-        onClick={() => prevIndex(navItems, selectedItem, onNavItemClick)}
-      >{'<'}</Button>
-      <Button
-        onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
-      >{'>'}</Button>
+      <div>
+        <Button
+          onClick={() => prevIndex(navItems, selectedItem, onNavItemClick)}
+          className={styles.prevButton.toString()}
+        >{'<'}</Button>
+        <Button
+          onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
+          className={styles.nextButton.toString()}
+        >{'>'}</Button>
+      </div>
       {
         navItemsBySelected.length === 1 ?
         (
