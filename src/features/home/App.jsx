@@ -3,6 +3,9 @@ import Title from './Title';
 import Nav from './Nav';
 import Section from './Section';
 import { navItems, getSectionContent } from './SectionContents';
+import DomDelayedUpdate from '../../common/components/DomDelayedUpdate';
+
+const showSectionClass = 'showSectionClass';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +17,10 @@ class App extends React.Component {
   }
 
   changeSection(newSection) {
+    if (newSection !== -1) {
+      this.resetSection.reset(true);
+    }
+
     this.setState({
       activeSection: newSection,
     });
@@ -21,7 +28,6 @@ class App extends React.Component {
 
   render() {
     const { activeSection } = this.state;
-    const displaySection = activeSection !== -1;
 
     return (
       <div>
@@ -31,13 +37,16 @@ class App extends React.Component {
           onNavItemClick={newSection => this.changeSection(newSection)}
           selectedItem={activeSection}
         />
-        {
-          displaySection ?
-            <Section
-              content={getSectionContent(activeSection)}
-            />
-            : null
-        }
+        <DomDelayedUpdate
+          mountClass={showSectionClass}
+          shouldUpdateWithMountClass
+          ref={(component) => { this.resetSection = component; }}
+        >
+          <Section
+            parentClass={showSectionClass}
+            content={getSectionContent(activeSection)}
+          />
+        </DomDelayedUpdate>
       </div>
     );
   }

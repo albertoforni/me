@@ -10,6 +10,9 @@ const styles = {
     height: 40,
     backgroundColor: 'white',
     border: '1px solid black',
+    zIndex: 10,
+    opacity: 0,
+    transition: 'opacity 150ms ease-out',
   }),
   hamburgerLine: style({
     width: '50%',
@@ -19,9 +22,13 @@ const styles = {
   }),
 };
 
-const HambuergMenu = ({ onClick }) => (
+styles.buttonShow = merge(styles.button, {
+  opacity: 1,
+});
+
+const HambuergMenu = ({ onClick, show }) => (
   <button
-    className={styles.button}
+    className={show ? styles.buttonShow : styles.button}
     aria-label="show menu"
     onClick={onClick}
   >
@@ -33,6 +40,7 @@ const HambuergMenu = ({ onClick }) => (
 
 HambuergMenu.propTypes = {
   onClick: PropTypes.func.isRequired,
+  show: PropTypes.bool,
 };
 
 export default HambuergMenu;

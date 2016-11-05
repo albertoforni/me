@@ -7,6 +7,11 @@ const defaultProps = {
   icon: 'a default icon stream',
   navIndex: 1,
   onNavItemClick: () => {},
+  animationClasses: {
+    parentStartAnimation: '',
+    hideRoot: '',
+    parentStopAnimation: '',
+  },
 };
 
 it('renders the menu text', () => {

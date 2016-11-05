@@ -5,6 +5,7 @@ import Section from './Section';
 
 const defaultProps = {
   content: 'some content',
+  parentClass: '',
 };
 
 it('renders the menu text', () => {

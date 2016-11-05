@@ -1,15 +1,37 @@
 import React, { PropTypes } from 'react';
-import { style, merge, parent } from 'glamor';
+import { style, merge, parent, select } from 'glamor';
 import { Button } from '../../common/style';
 
 const styles = {
+  navItem: (parentStartAnimation, hideRoot, parentStopAnimation) => merge(
+    {
+      height: 0,
+      opacity: 0,
+      marginBottom: '1rem',
+      overflow: 'hidden',
+      transition: 'all 150ms ease-in-out',
+    },
+    parent(`.${parentStartAnimation}`, {
+      height: '4rem',
+      opacity: 1,
+      overflow: 'visible',
+    }),
+    select(`.${hideRoot}`, {
+      height: 0,
+      opacity: 0,
+      margin: 0,
+      overflow: 'hidden',
+    }),
+    parent(`.${parentStopAnimation}`, {
+      transition: 'none',
+    })
+  ),
   menuButton: merge([
     Button.noStyle,
     {
       display: 'flex',
       alignItems: 'center',
       width: '100%',
-      marginBottom: '1rem',
     }]
   ),
   menuButtonTextContainer: style(
@@ -43,13 +65,20 @@ const NavItem = ({
   text,
   navIndex,
   onNavItemClick,
-  style: inlineStyle,
   disabled,
+  animationClasses: {
+    parentStartAnimation,
+    hideRoot,
+    parentStopAnimation,
+  },
   }) => {
   const menuLbl = `menuLbl${navIndex}`;
 
   return (
-    <li role="menuitem" style={inlineStyle}>
+    <li
+      role="menuitem"
+      className={`${hideRoot} ${styles.navItem(parentStartAnimation, hideRoot, parentStopAnimation)}`}
+    >
       <button
         className={`${styles.menuButton}`}
         aria-labelledby={menuLbl}
@@ -73,11 +102,14 @@ NavItem.propTypes = {
   text: PropTypes.string.isRequired,
   navIndex: PropTypes.number.isRequired,
   onNavItemClick: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ])),
   disabled: PropTypes.bool,
+  animationClasses: PropTypes.shape({
+    /* eslint-disable react/no-unused-prop-types */
+    parentStartAnimation: PropTypes.string,
+    hideRoot: PropTypes.string,
+    parentStopAnimation: PropTypes.string,
+  }),
+  /* eslint-enable react/no-unused-prop-types */
 };
 
 

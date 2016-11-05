@@ -4,6 +4,7 @@ import { List } from '../../common/style';
 import NavItem from './NavItem';
 import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
+import DomDelayedUpdate from '../../common/components/DomDelayedUpdate';
 
 const prevButtonStyle = style({
   position: 'fixed',
@@ -26,14 +27,10 @@ const styles = {
   }),
 };
 
-const getNavItems = (navItems, selectedItem) => {
-  const selectedNavItem = navItems[selectedItem];
-
-  if (selectedNavItem) {
-    return [selectedNavItem];
-  }
-
-  return navItems;
+const animationClasses = {
+  parentStartAnimation: 'parentStartAnimation',
+  hideRoot: 'hideRoot',
+  parentStopAnimation: 'parentStopAnimation',
 };
 
 const nextIndex = (items, currentIndex, onNavItemClick) => {
@@ -48,44 +45,59 @@ const prevIndex = (items, currentIndex, onNavItemClick) => {
   onNavItemClick(prevItemIndex < 0 ? items.length - 1 : prevItemIndex);
 };
 
-const Nav = ({ navItems, onNavItemClick, selectedItem }) => {
-  const navItemsBySelected = getNavItems(navItems, selectedItem);
-  return (
-    <nav>
-      <div>
-        <Button
-          onClick={() => prevIndex(navItems, selectedItem, onNavItemClick)}
-          className={styles.prevButton.toString()}
-        >{'<'}</Button>
-        <Button
-          onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
-          className={styles.nextButton.toString()}
-        >{'>'}</Button>
-      </div>
-      {
-        navItemsBySelected.length === 1 ?
-        (
-          <HamburgerMenu
-            onClick={() => onNavItemClick(-1)}
-          />
-        ) : null
-      }
-      <ul className={styles.menu} role="menubar">
-        {
-          navItemsBySelected.map((navItem, index) =>
-            <NavItem
-              {...navItem}
-              navIndex={index}
-              onNavItemClick={() => onNavItemClick(index)}
-              key={index}
-              disabled={navItemsBySelected.length === 1}
-            />
-          )
-        }
-      </ul>
-    </nav>
-  );
-};
+class Nav extends React.Component {
+  resetMenu() {
+    this.DomDelayedUpdate.reset();
+    this.props.onNavItemClick(-1);
+  }
+
+  render() {
+    const { navItems, onNavItemClick, selectedItem } = this.props;
+    return (
+      <nav>
+        <div>
+          <Button
+            onClick={() => prevIndex(navItems, selectedItem, onNavItemClick)}
+            className={styles.prevButton.toString()}
+          >{'<'}</Button>
+          <Button
+            onClick={() => nextIndex(navItems, selectedItem, onNavItemClick)}
+            className={styles.nextButton.toString()}
+          >{'>'}</Button>
+        </div>
+        <HamburgerMenu
+          onClick={() => this.resetMenu()}
+          show={selectedItem !== -1}
+        />
+        <DomDelayedUpdate
+          mountClass={animationClasses.parentStartAnimation}
+          mountDelay={150}
+          shouldUpdate={this.props.selectedItem !== -1}
+          updateClass={animationClasses.parentStopAnimation}
+          ref={(component) => { this.DomDelayedUpdate = component; }}
+        >
+          <ul className={styles.menu} role="menubar">
+            {
+              navItems.map((navItem, index) =>
+                <NavItem
+                  {...navItem}
+                  animationClasses={{
+                    ...animationClasses,
+                    hideRoot: selectedItem !== -1 && selectedItem !== index ? animationClasses.hideRoot : '',
+                  }}
+                  navIndex={index}
+                  onNavItemClick={() => onNavItemClick(index)}
+                  key={index}
+                  disabled={selectedItem !== -1}
+                />
+              )
+            }
+          </ul>
+        </DomDelayedUpdate>
+      </nav>
+    );
+  }
+}
 
 Nav.propTypes = {
   navItems: PropTypes.arrayOf(PropTypes.object),

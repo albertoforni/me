@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Nav from './Nav';
 import NavItem from './NavItem';
 import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
+import DomDelayedUpdate from '../../common/components/DomDelayedUpdate';
 
 const defaultProps = {
   navItems: [
@@ -14,19 +15,25 @@ const defaultProps = {
   selectedItem: -1,
 };
 
-it('renders NavItems', () => {
+it('renders NavItems inside DomDelayedUpdate', () => {
   const navItems = [
     { icon: 'an icon', text: 'some text' },
     { icon: 'an icon', text: 'some text' },
   ];
+
   const wrapper = shallow(
     <Nav
       {...defaultProps}
       navItems={navItems}
     />
   );
+  const domDelayedUpdate = wrapper.find(DomDelayedUpdate);
+  expect(domDelayedUpdate.find(NavItem).length).toEqual(navItems.length);
 
-  expect(wrapper.find(NavItem).length).toEqual(navItems.length);
+  const domDelayedUpdateProps = domDelayedUpdate.props();
+  expect(domDelayedUpdateProps.mountClass).toEqual('parentStartAnimation');
+  expect(domDelayedUpdateProps.mountDelay).toEqual(150);
+  expect(domDelayedUpdateProps.shouldUpdate).toEqual(false);
 });
 
 it('calls the onNavItemClick with the new menu Index', () => {
@@ -44,7 +51,7 @@ it('calls the onNavItemClick with the new menu Index', () => {
   expect(aSpyFunc).toHaveBeenCalledWith(1);
 });
 
-it('renders only the selectedNavItem', () => {
+it('shows only the selectedNavItem', () => {
   const thisTestIcon = 'this test icon';
   const thisTestText = 'this test text';
 
@@ -63,9 +70,13 @@ it('renders only the selectedNavItem', () => {
     />
   );
 
-  expect(wrapper.find(NavItem).length).toEqual(1);
-  expect(wrapper.find(NavItem).props().icon).toEqual(thisTestIcon);
-  expect(wrapper.find(NavItem).props().text).toEqual(thisTestText);
+  expect(wrapper.find(NavItem).length).toEqual(3);
+  expect(wrapper.find(NavItem).at(selectedItem).props().icon).toEqual(thisTestIcon);
+  expect(wrapper.find(NavItem).at(selectedItem).props().text).toEqual(thisTestText);
+  expect(wrapper.find(NavItem).at(selectedItem).props().animationClasses.hideRoot).toEqual('');
+
+  expect(wrapper.find(NavItem).at(0).props().animationClasses.hideRoot).toEqual('hideRoot');
+  expect(wrapper.find(NavItem).at(1).props().animationClasses.hideRoot).toEqual('hideRoot');
 });
 
 describe('navigation buttons', () => {
@@ -138,7 +149,7 @@ describe('navigation buttons', () => {
 });
 
 describe('hamburger menu', () => {
-  it('doesnt render the hamburger menu if there are no active sections', () => {
+  it('doesnt show the hamburger menu if there are no active sections', () => {
     const wrapper = shallow(
       <Nav
         {...defaultProps}
@@ -146,13 +157,27 @@ describe('hamburger menu', () => {
       />
     );
 
-    expect(wrapper.find(HamburgerMenu).length).toEqual(0);
+    expect(wrapper.find(HamburgerMenu).length).toEqual(1);
+    expect(wrapper.find(HamburgerMenu).props().show).toEqual(false);
   });
 
-  it('calls onNavItemClick with index -1', () => {
-    const aSpyFunc = jest.fn();
-
+  it('shows the hamburger menu if there is an active section', () => {
     const wrapper = shallow(
+      <Nav
+        {...defaultProps}
+        selectedItem={0}
+      />
+    );
+
+    expect(wrapper.find(HamburgerMenu).length).toEqual(1);
+    expect(wrapper.find(HamburgerMenu).props().show).toEqual(true);
+  });
+
+  it('calls onNavItemClick with index -1 after reseting DomDelayedUpdate', () => {
+    const aSpyFunc = jest.fn();
+    const aDomDelayedUpdateSpyFn = jest.fn();
+
+    const wrapper = mount(
       <Nav
         {...defaultProps}
         onNavItemClick={aSpyFunc}
@@ -160,8 +185,11 @@ describe('hamburger menu', () => {
       />
     );
 
-    wrapper.find(HamburgerMenu).at(0).props().onClick();
+    wrapper.find(DomDelayedUpdate).node.reset = aDomDelayedUpdateSpyFn;
+
+    wrapper.find(HamburgerMenu).props().onClick();
 
     expect(aSpyFunc).toHaveBeenCalledWith(-1);
+    expect(aDomDelayedUpdateSpyFn).toHaveBeenCalledWith();
   });
 });
