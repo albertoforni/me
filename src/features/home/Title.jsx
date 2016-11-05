@@ -1,7 +1,7 @@
 import React from 'react';
 import { style, merge } from 'glamor';
 import Link from '../../common/components/Link';
-import { List } from '../../common/style';
+import { List, MediaQueries } from '../../common/style';
 
 const styles = {
   header: style({
@@ -9,7 +9,14 @@ const styles = {
     flexDirection: 'column',
   }),
   title: style({
+    fontFamily: 'Roboto, cursive',
+    fontSize: '8rem',
+    margin: '1rem 0 0 0',
     textAlign: 'center',
+    [MediaQueries.small]: {
+      margin: '2rem 0 0 0',
+      fontSize: '5rem',
+    },
   }),
   links: merge(
     List.noStyle,
@@ -22,6 +29,7 @@ const styles = {
   link: merge(
     {
       padding: '1rem',
+      fontSize: '2rem',
     }
   ),
 };

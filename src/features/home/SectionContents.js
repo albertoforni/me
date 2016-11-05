@@ -20,7 +20,7 @@ clients to understand their users needs and to build top quality software.
 
 const educationContent = `
 ### [General Assembly](https://generalassemb.ly/) WDI - Web Development Immersive, Computer Software Engineering
-#### Sydeny, Australia
+#### Sydney, Australia
 #### Jan 2014 - Apr 2014
 12-weeks. All day, every day. Program focused on Ruby on Rails.
 

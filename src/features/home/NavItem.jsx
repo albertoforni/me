@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { style, merge, parent, select } from 'glamor';
-import { Button } from '../../common/style';
+import { Button, Colors, MediaQueries } from '../../common/style';
 
 const styles = {
   navItem: (parentStartAnimation, hideRoot, parentStopAnimation) => merge(
@@ -40,14 +40,18 @@ const styles = {
       alignItems: 'center',
       height: '4rem',
       width: '70%',
-      backgroundColor: '#888',
-      color: 'white',
+      backgroundColor: Colors.green,
+      color: Colors.white,
       transition: 'box-shadow 150ms ease-out',
+      [MediaQueries.small]: {
+        width: '60%',
+      },
     },
   ),
   menuButtonTextContent: style({
     flex: 1,
     paddingRight: '2rem',
+    letterSpacing: '0.2rem',
     textAlign: 'right',
     textTransform: 'uppercase',
   }),

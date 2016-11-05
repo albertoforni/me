@@ -1,4 +1,5 @@
 import React from 'react';
+import { style } from 'glamor';
 import Title from './Title';
 import Nav from './Nav';
 import Section from './Section';
@@ -6,6 +7,11 @@ import { navItems, getSectionContent } from './SectionContents';
 import DomDelayedUpdate from '../../common/components/DomDelayedUpdate';
 
 const showSectionClass = 'showSectionClass';
+const styles = {
+  root: style({
+    fontFamily: '"Open Sans", sans-serif',
+  }),
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +36,7 @@ class App extends React.Component {
     const { activeSection } = this.state;
 
     return (
-      <div>
+      <div className={styles.root}>
         <Title />
         <Nav
           navItems={navItems}

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { style, merge } from 'glamor';
-import { List } from '../../common/style';
+import { List, Colors } from '../../common/style';
 import NavItem from './NavItem';
 import HamburgerMenu from './HamburgerMenu';
 import Button from '../../common/components/Button';
@@ -13,9 +13,15 @@ const prevButtonStyle = style({
   height: 40,
   width: 40,
   borderRadius: '50%',
-  border: '1px solid black',
-  background: 'white',
+  border: `1px solid ${Colors.lightGray}`,
+  background: Colors.white,
   outline: 0,
+  transition: 'all 150ms ease-out',
+  transitionProperty: 'border-color, color',
+  ':hover': {
+    borderColor: Colors.green,
+    color: Colors.green,
+  },
 });
 
 const styles = {
