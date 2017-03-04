@@ -26,13 +26,14 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .jsx,.js",
     "deploy": "gh-pages-deploy",
-    "clean-source": "rimraf README.md src webroot package.json"
+    "clean-source": "ls | grep -vE \"build|node_modules\" | xargs rm -rf"
   },
   "gh-pages-deploy": {
     "staticpath": "build",
     "cname": "albertoforni.com",
     "prep": [
-      "build"
+      "build",
+      "clean-source"
     ]
   }
 }
