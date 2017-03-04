@@ -9,6 +9,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "gh-pages-deploy": "0.4.2",
     "react-addons-test-utils": "^15.3.2",
     "react-scripts": "0.7.0"
   },
@@ -23,6 +24,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .jsx,.js"
+    "lint": "eslint src --ext .jsx,.js",
+    "deploy": "gh-pages-deploy",
+    "clean-source": "rimraf README.md src webroot package.json"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "build",
+    "cname": "albertoforni.com",
+    "prep": [
+      "build"
+    ]
   }
 }
