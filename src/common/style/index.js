@@ -33,11 +33,16 @@ insertRule(`
 body {
   color: ${Colors.black};
 }
+`);
 
+insertRule(`
 a {
   color: ${Colors.green};
   text-decoration: none;
 }
+`);
+
+insertRule(`
 ${MediaQueries.small} { 
   html {
     font-size: 50%;

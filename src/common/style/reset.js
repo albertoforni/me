@@ -2,13 +2,18 @@ import 'glamor/reset';
 import { insertRule } from 'glamor';
 
 insertRule(`
-/* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
+  font-size: 62.5%;
 }
+`);
+
+insertRule(`
 *, *:before, *:after {
   box-sizing: inherit;
 }
-html { font-size: 62.5%; }
+`);
+
+insertRule(`
 body { font-size: 1.6rem; }
 `);
