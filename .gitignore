@@ -1,15 +1,28 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+dist
+.solid
+.output
+.vercel
+.netlify
+netlify
+
+# Environment
+.env
+.env*.local
 
 # dependencies
-node_modules
+/node_modules
 
-# testing
-coverage
+# IDEs and editors
+/.idea
+.project
+.classpath
+*.launch
+.settings/
 
-# production
-build
+# Temp
+gitignore
 
-# misc
+# System Files
 .DS_Store
-.env
-npm-debug.log
+Thumbs.db

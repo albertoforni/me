@@ -1,4 +1,5 @@
 {
+  "root": true,
   "name": "resume",
   "version": "0.1.0",
   "private": true,
@@ -31,9 +32,6 @@
   "gh-pages-deploy": {
     "staticpath": "build",
     "cname": "albertoforni.com",
-    "prep": [
-      "build",
-      "clean-source"
-    ]
+    "prep": ["build", "clean-source"]
   }
 }
