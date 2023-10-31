@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nvar Link = function Link(_ref) {\n  var href = _ref.href,\n      children = _ref.children;\n  return __jsx(\"a\", {\n    href: href\n  }, children);\n};\n\nexport default Link;","map":null,"metadata":{},"sourceType":"module"}
