@@ -1,0 +1,62 @@
+{
+  "_index2.mjs": {
+    "file": "index2.mjs",
+    "name": "index"
+  },
+  "_routing.mjs": {
+    "file": "routing.mjs",
+    "name": "routing"
+  },
+  "_server-fns.mjs": {
+    "file": "server-fns.mjs",
+    "name": "server-fns",
+    "dynamicImports": [
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/app.tsx"
+    ]
+  },
+  "src/app.tsx": {
+    "file": "app.mjs",
+    "name": "app",
+    "src": "src/app.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index2.mjs",
+      "_server-fns.mjs",
+      "_routing.mjs"
+    ],
+    "css": [
+      "assets/app-Cgm0YfeP.css"
+    ]
+  },
+  "src/routes/[...404].tsx?pick=default&pick=$css": {
+    "file": "_...404_.mjs",
+    "name": "_...404_",
+    "src": "src/routes/[...404].tsx?pick=default&pick=$css",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index2.mjs"
+    ]
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "index.mjs",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing.mjs"
+    ]
+  },
+  "virtual:$vinxi/handler/server-fns": {
+    "file": "entry.mjs",
+    "name": "entry",
+    "src": "virtual:$vinxi/handler/server-fns",
+    "isEntry": true,
+    "imports": [
+      "_server-fns.mjs"
+    ]
+  }
+}

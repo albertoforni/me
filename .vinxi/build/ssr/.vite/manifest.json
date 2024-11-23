@@ -1,0 +1,49 @@
+{
+  "_HttpStatusCode-C32pSpjH.js": {
+    "file": "assets/HttpStatusCode-C32pSpjH.js",
+    "name": "HttpStatusCode"
+  },
+  "_routing-BF61k76u.js": {
+    "file": "assets/routing-BF61k76u.js",
+    "name": "routing"
+  },
+  "src/routes/[...404].tsx?pick=default&pick=$css": {
+    "file": "_...404_.js",
+    "name": "_...404_",
+    "src": "src/routes/[...404].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_HttpStatusCode-C32pSpjH.js"
+    ]
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "index.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-BF61k76u.js"
+    ]
+  },
+  "virtual:$vinxi/handler/ssr": {
+    "file": "ssr.js",
+    "name": "ssr",
+    "src": "virtual:$vinxi/handler/ssr",
+    "isEntry": true,
+    "imports": [
+      "_HttpStatusCode-C32pSpjH.js",
+      "_routing-BF61k76u.js"
+    ],
+    "dynamicImports": [
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css"
+    ],
+    "css": [
+      "assets/ssr-Cgm0YfeP.css"
+    ]
+  }
+}
