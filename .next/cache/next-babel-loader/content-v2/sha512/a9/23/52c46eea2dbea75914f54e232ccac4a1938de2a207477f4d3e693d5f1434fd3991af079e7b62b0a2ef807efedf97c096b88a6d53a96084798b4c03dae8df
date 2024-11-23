@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nconst Button = ({\n  children,\n  onClick,\n  className\n}) => __jsx(\"button\", {\n  onClick: onClick,\n  className: className\n}, children);\n\nexport default Button;","map":null,"metadata":{},"sourceType":"module"}

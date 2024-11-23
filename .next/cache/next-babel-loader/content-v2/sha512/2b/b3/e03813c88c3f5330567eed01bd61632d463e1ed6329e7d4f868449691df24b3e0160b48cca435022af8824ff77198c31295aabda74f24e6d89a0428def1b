@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\n\nconst Link = ({\n  href,\n  children\n}) => __jsx(\"a\", {\n  href: href\n}, children);\n\nexport default Link;","map":null,"metadata":{},"sourceType":"module"}
