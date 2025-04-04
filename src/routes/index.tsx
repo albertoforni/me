@@ -67,7 +67,11 @@ const Home: Component = () => {
         <Profile />
       </main>
       <section class="flex-1 overflow-hidden hidden flex-col justify-end items-center md:flex">
-        <img src="me.png" alt="Alberto Forni" class="max-h-full object-cover" />
+        <img
+          src="me.webp"
+          alt="Alberto Forni"
+          class="max-h-full object-cover"
+        />
       </section>
     </div>
   );
