@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { A } from "@solidjs/router";
 import { BsMailbox } from "solid-icons/bs";
 import {
   FaBrandsDev,
@@ -6,7 +6,7 @@ import {
   FaBrandsLinkedin,
   FaBrandsTwitter,
 } from "solid-icons/fa";
-import { A } from "@solidjs/router";
+import { Component } from "solid-js";
 
 const Title: Component = () => {
   return (
@@ -67,11 +67,7 @@ const Home: Component = () => {
         <Profile />
       </main>
       <section class="flex-1 overflow-hidden hidden flex-col justify-end items-center md:flex">
-        <img
-          src="me.jpeg"
-          alt="Alberto Forni"
-          class="max-h-full object-cover"
-        />
+        <img src="me.png" alt="Alberto Forni" class="max-h-full object-cover" />
       </section>
     </div>
   );
